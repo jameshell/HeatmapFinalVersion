@@ -35,13 +35,13 @@ public class DaoAngle {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
       String myUrl = "jdbc:mysql://localhost:3306/Edison?useLegacyDatetimeCode=false&serverTimezone=UTC";
       Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-      String query = "SELECT absdeg,hora FROM DatosEdison order by id desc limit 0";
+      String query = "SELECT absdeg,hora FROM DatosEdison order by id desc limit 1";
       Statement st = conn.createStatement();
       ResultSet rs = st.executeQuery(query);
       while (rs.next())
       {
         Timestamp d=rs.getTimestamp("hora");
-        float f=rs.getFloat("absdeg");
+        int f=(int) rs.getFloat("absdeg");
         pos p=new pos(f, d);
         ans.add(p);
       }

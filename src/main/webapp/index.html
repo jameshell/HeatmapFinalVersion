@@ -231,7 +231,7 @@
                 var jsonData = $.getJSON("AngleServlet", function(result){
                 }).done(function(results){
                     $.each(results, function (index, pos) {
-                       gl.refesh(pos.y);
+                       g1.refresh(pos.y);
                     });
                 }); 
             },500);
