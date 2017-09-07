@@ -118,7 +118,9 @@
           var chart = new google.visualization.LineChart($('#chart').get(0));
 
           chart.draw(data, {
-            title: 'Temperature'
+            title: 'Temperature',
+            'width':300,
+            'height':250
           });
 
         });
@@ -133,9 +135,100 @@
       // call drawChart once google charts is loaded
        google.setOnLoadCallback(drawChart);
       // onload callback
+      function drawChartLux() {
+
+        // JSONP request
+        setInterval(function(){
+        var jsonData = $.getJSON("NewServletlux", function(result){
+        }).done(function(results){
+            
+          var data = new google.visualization.DataTable();
+          
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Lux');
+          console.log("Holi");
+          $.each(results, function (index, pos) {
+              console.log(new Date(pos.x));
+            data.addRow([
+              (new Date(pos.x)),
+              parseFloat(pos.y)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart1').get(0));
+
+          chart.draw(data, {
+            title: 'Lux',
+            'width':300,
+            'height':250,
+            vAxis: {
+            viewWindowMode:'explicit',
+            viewWindow: {
+              max:300,
+              min:0
+            }
+        }
+          });
+
+        });
+    }, 500);
+      }
+  
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+    function drawChartthresh() {
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+      // JSONP request
+        setInterval(function(){
+        var jsonData = $.getJSON("NewServlet2", function(result){
+        }).done(function(results){
+            
+          var data = new google.visualization.DataTable();
+          
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'y');
+          console.log("Holi");
+          $.each(results, function (index, pos) {
+              console.log(new Date(pos.x));
+            data.addRow([
+              (new Date(pos.x)),
+              parseFloat(pos.y)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart2').get(0));
+
+          chart.draw(data, {
+            title: 'Wimp Weather Station',
+            'width':300,
+            'height':250,
+            hAxis: {title: 'y',  titleTextStyle: {color: '#333'}},
+            vAxis: {
+            viewWindowMode:'explicit',
+            viewWindow: {
+              max:300,
+              min:0
+            }
+        }
+          });
+
+        });
+    }, 500);
+      }
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
       </script>
          <div id="chart" class="container" style="width: 100%;">
           <script> setInterval(drawChartCelcius(), 3000); </script>
+          <div id="chart1" class="container" style="width: 100%;">
+              <script> setInterval(drawChartLux(), 3000); </script>
+          <div id="chart2" class="container" style="width: 100%;">
+              <script> setInterval(drawChartthresh(), 3000); </script>
       </div>
         </div>
 
