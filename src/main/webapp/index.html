@@ -102,11 +102,11 @@
         setInterval(function(){
         var jsonData = $.getJSON("NewServlet", function(result){
         }).done(function(results){
-            
           var data = new google.visualization.DataTable();
           
           data.addColumn('datetime', 'Time');
           data.addColumn('number', 'Temperature');
+          console.log("Holi");
           $.each(results, function (index, pos) {
               console.log(new Date(pos.x));
             data.addRow([
@@ -119,8 +119,13 @@
 
           chart.draw(data, {
             title: 'Temperature',
-            'width':300,
-            'height':250
+            vAxis: {
+            viewWindowMode:'explicit',
+            viewWindow: {
+              max:300,
+              min:0
+            }
+        }
           });
 
         });
@@ -129,11 +134,12 @@
   
       // load chart lib
       google.load('visualization', '1', {
-        packages: ['controls','corechart']
+        packages: ['corechart']
       });
 
       // call drawChart once google charts is loaded
-       google.setOnLoadCallback(drawChart);
+      google.setOnLoadCallback(drawChart);
+
       // onload callback
       function drawChartLux() {
 
@@ -159,8 +165,6 @@
 
           chart.draw(data, {
             title: 'Lux',
-            'width':300,
-            'height':250,
             vAxis: {
             viewWindowMode:'explicit',
             viewWindow: {
@@ -178,10 +182,12 @@
       google.load('visualization', '1', {
         packages: ['corechart']
       });
-    function drawChartthresh() {
+
       // call drawChart once google charts is loaded
       google.setOnLoadCallback(drawChart);
-      // JSONP request
+      // onload callback
+      function drawChartthresh() {  
+        // JSONP request
         setInterval(function(){
         var jsonData = $.getJSON("NewServlet2", function(result){
         }).done(function(results){
@@ -202,9 +208,7 @@
           var chart = new google.visualization.LineChart($('#chart2').get(0));
 
           chart.draw(data, {
-            title: 'Wimp Weather Station',
-            'width':300,
-            'height':250,
+            title: 'Sonido',
             hAxis: {title: 'y',  titleTextStyle: {color: '#333'}},
             vAxis: {
             viewWindowMode:'explicit',
@@ -225,10 +229,12 @@
       </script>
          <div id="chart" class="container" style="width: 100%;">
           <script> setInterval(drawChartCelcius(), 3000); </script>
-          <div id="chart1" class="container" style="width: 100%;">
-              <script> setInterval(drawChartLux(), 3000); </script>
-          <div id="chart2" class="container" style="width: 100%;">
-              <script> setInterval(drawChartthresh(), 3000); </script>
+      </div>
+      <div id="chart1" class="container" style="width: 100%;">
+          <script> setInterval(drawChartLux(), 3000); </script>
+      </div>
+      <div id="chart2" class="container" style="width: 100%;">
+          <script> setInterval(drawChartthresh(), 3000); </script>
       </div>
         </div>
 
