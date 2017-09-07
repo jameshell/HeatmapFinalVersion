@@ -93,11 +93,15 @@
           </div>
           <div class="card-body">
          <!--   <canvas id="myAreaChart" width="100%" height="30"></canvas> -->
-         <div id="chart" style="width: 100%;"></div>
-         <script> setInterval(drawChart(), 3000); </script>
-
-
-          </div>
+         <div id="chart" style="width: 100%;">
+          <script> setInterval(drawChartCelcius(), 3000); </script>
+      </div>
+      <div id="chart1" style="width: 100%;">
+          <script> setInterval(drawChartLux(), 3000); </script>
+      </div>
+      <div id="chart2" style="width: 100%;">
+          <script> setInterval(drawChartthresh(), 3000); </script>
+      </div>
           <div class="card-footer small text-muted">
             Updated yesterday at 11:59 PM
           </div>
@@ -113,24 +117,22 @@
                 <i class="fa fa-bar-chart"></i>
                 Gauges Examples
               </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-sm-8 my-auto">
-                    <!-- <canvas id="myBarChart" width="100" height="50"></canvas> -->
-                    <div id="chart_div" style="width: 500px; height: 180px;"></div>
-                  </div>
-                  <!-- <div class="col-sm-4 text-center my-auto">
-                    <div class="h4 mb-0 text-primary">$34,693</div>
-                    <div class="small text-muted">YTD Revenue</div>
-                    <hr>
-                    <div class="h4 mb-0 text-warning">$18,474</div>
-                    <div class="small text-muted">YTD Expenses</div>
-                    <hr>
-                    <div class="h4 mb-0 text-success">$16,219</div>
-                    <div class="small text-muted">YTD Margin</div>
-                  </div> -->
+                <div class="container">
+                    <div id="g1" class="gauge"></div>
                 </div>
-              </div>
+            <script src="raphael-2.1.4.min.js"></script>
+            <script src="justgage.js"></script>
+            <script>
+                var g1 = new JustGage({
+                id: "g1",
+                title: "Angulo",
+                value: 50,
+                min: 0,
+                max: 300,
+                decimals: 0,
+                gaugeWidthScale: 0.6
+            });
+            </script>
               <div class="card-footer small text-muted">
                 Updated yesterday at 11:59 PM
               </div>
@@ -290,17 +292,96 @@
         }, 26000);
       }
     </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
 
-   
-      <!--Script para la animacion de la area chart -->
-         
+    <!-- EXAMPLE SCRIPT -->
+        
     <script>
       // onload callback
-      function drawChart2() {
+      function drawChartCelcius() {
 
         // JSONP request
         setInterval(function(){
         var jsonData = $.getJSON("NewServlet", function(result){
+        }).done(function(results){
+            
+          var data = new google.visualization.DataTable();
+          
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Temperature');
+          console.log("Holi");
+          $.each(results, function (index, pos) {
+              console.log(new Date(pos.x));
+            data.addRow([
+              (new Date(pos.x)),
+              parseFloat(pos.y)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart').get(0));
+
+          chart.draw(data, {
+            title: 'Temperature'
+          });
+
+        });
+    }, 500);
+      }
+  
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+      // onload callback
+      function drawChartLux() {
+
+        // JSONP request
+        setInterval(function(){
+        var jsonData = $.getJSON("NewServletlux", function(result){
+        }).done(function(results){
+            
+          var data = new google.visualization.DataTable();
+          
+          data.addColumn('datetime', 'Time');
+          data.addColumn('number', 'Lux');
+          console.log("Holi");
+          $.each(results, function (index, pos) {
+              console.log(new Date(pos.x));
+            data.addRow([
+              (new Date(pos.x)),
+              parseFloat(pos.y)
+            ]);
+          });
+
+          var chart = new google.visualization.LineChart($('#chart1').get(0));
+
+          chart.draw(data, {
+            title: 'Lux'
+          });
+
+        });
+    }, 500);
+      }
+  
+      // load chart lib
+      google.load('visualization', '1', {
+        packages: ['corechart']
+      });
+
+      // call drawChart once google charts is loaded
+      google.setOnLoadCallback(drawChart);
+
+      // onload callback
+      function drawChartthresh() {
+
+        // JSONP request
+        setInterval(function(){
+        var jsonData = $.getJSON("NewServlet2", function(result){
         }).done(function(results){
             
           var data = new google.visualization.DataTable();
@@ -316,14 +397,14 @@
             ]);
           });
 
-          var chart = new google.visualization.LineChart($('#chart').get(0));
+          var chart = new google.visualization.LineChart($('#chart2').get(0));
 
           chart.draw(data, {
-            title: 'Temperatura'
+            title: 'Wimp Weather Station'
           });
 
         });
-    }, 1500);
+    }, 500);
       }
   
       // load chart lib
@@ -334,6 +415,9 @@
       // call drawChart once google charts is loaded
       google.setOnLoadCallback(drawChart);
     </script>
+   
+      <!--Script para la animacion de la area chart -->
+         
 
         <!-- Script para conseguir el tiempo de la maquina y poder usarlo en graficas en funcion del tiempo  -->
         <script>
