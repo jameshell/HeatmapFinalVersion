@@ -85,5 +85,10 @@ public class RSI {
     public void setRssi_b6(float rssi_b6) {
         this.rssi_b6 = rssi_b6;
     }
+
+    @Override
+    public String toString() {
+        return "RSI{" + "x=" + x + ", rssi_b1=" + rssi_b1 + ", rssi_b2=" + rssi_b2 + ", rssi_b3=" + rssi_b3 + ", rssi_b4=" + rssi_b4 + ", rssi_b5=" + rssi_b5 + ", rssi_b6=" + rssi_b6 + '}';
+    }
     
 }

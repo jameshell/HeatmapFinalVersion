@@ -29,7 +29,7 @@ public class RSIDAO {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
       String myUrl = "jdbc:mysql://localhost:3306/Edison?useLegacyDatetimeCode=false&serverTimezone=UTC";
       Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-      String query = "SELECT rssi_b1,rssi_b2,rssi_b3,rssi_b4,rssi_b5,rssi_b6,hora FROM DatosEdison order by id desc limit 100";
+      String query = "SELECT rssi_b1,rssi_b2,rssi_b3,rssi_b4,rssi_b5,rssi_b6,hora FROM DatosPi order by id desc limit 100";
       Statement st = conn.createStatement();
       ResultSet rs = st.executeQuery(query);
       while (rs.next())
@@ -42,6 +42,7 @@ public class RSIDAO {
         float b5=rs.getFloat("rssi_b5");
         float b6=rs.getFloat("rssi_b6");
         RSI rsi=new RSI(d, b1, b2, b3, b4, b5, b6);
+          System.out.println(rsi);
         ans.add(rsi);
       }
         rs.close();

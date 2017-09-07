@@ -51,7 +51,7 @@ public class RSIServlet extends HttpServlet {
             throws ServletException, IOException {
         Gson g=new Gson();
         RSIDAO d=new RSIDAO();
-        ArrayList<RSI> al=new ArrayList<>();
+        ArrayList<RSI> al=new ArrayList();
         al=d.busqueda();
         String json=g.toJson(al);
         response.setContentType("application/json");

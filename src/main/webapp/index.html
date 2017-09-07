@@ -231,26 +231,35 @@
                <script>
         function drawChartRSI() {
         setInterval(function(){
-        var jsonData = $.getJSON("NewServlet2", function(result){
+        var jsonData = $.getJSON("RSIServlet", function(result){
         }).done(function(results){
             var data = new google.visualization.DataTable();
           
           data.addColumn('datetime', 'Time');
-          data.addColumn('number', 'Sonido');
+          data.addColumn('number', 'papata1');
+          data.addColumn('number', 'papata2');
+          data.addColumn('number', 'papata3');
+          data.addColumn('number', 'papata4');
+          data.addColumn('number', 'papata5');
+          data.addColumn('number', 'papata6');
           $.each(results, function (index, pos) {
               console.log(new Date(pos.x));
             data.addRow([
               (new Date(pos.x)),
-              parseFloat(pos.y)
+              parseFloat(pos.rssi_b1),
+              parseFloat(pos.rssi_b2),
+              parseFloat(pos.rssi_b3),
+              parseFloat(pos.rssi_b4),
+              parseFloat(pos.rssi_b5),
+              parseFloat(pos.rssi_b6)
             ]);
           });
-           var chart = new google.visualization.AreaChart($('#chart2').get(0));
+           var chart = new google.visualization.AreaChart($('#rsi').get(0));
            
            var options = {
           title: 'Sonido',
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
-          vAxis: {minValue: 0},
-          colors: ['Brown']
+          colors: ['Brown','blue','pink','purple','orange','gray']
         };
           chart.draw(data,options);
         });
@@ -260,9 +269,9 @@
         
       google.charts.setOnLoadCallback(drawChart);
       </script> 
-          <div class="card-body">
+          <div id="rsi" class="card-body">
           <!-- ADJUNTAR AQUI LOS GRAFICOS MALDITA SEA :V !!!!!!------------------------------------------ -->
-          
+          <script>setInterval(drawChartRSI(), 3000);</script>
           </div>
           <div class="card-footer small text-muted">
             Updated yesterday at 11:59 PM
