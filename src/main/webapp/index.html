@@ -93,19 +93,16 @@
           </div>
           <div class="card-body">
          <!--   <canvas id="myAreaChart" width="100%" height="30"></canvas> -->
-         <script>
-      // onload callback
+         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
       function drawChartCelcius() {
-
-        // JSONP request
-        setInterval(function(){
+          setInterval(function(){
         var jsonData = $.getJSON("NewServlet", function(result){
         }).done(function(results){
-          var data = new google.visualization.DataTable();
+            var data = new google.visualization.DataTable();
           
           data.addColumn('datetime', 'Time');
           data.addColumn('number', 'Temperature');
-          console.log("Holi");
           $.each(results, function (index, pos) {
               console.log(new Date(pos.x));
             data.addRow([
@@ -113,45 +110,30 @@
               parseFloat(pos.y)
             ]);
           });
-
-          var chart = new google.visualization.LineChart($('#chart').get(0));
-
-          chart.draw(data, {
-            title: 'Temperature',
-            vAxis: {
-            viewWindowMode:'explicit',
-            viewWindow: {
-              max:300,
-              min:0
-            }
-        }
-          });
-
+           var chart = new google.visualization.AreaChart($('#chart').get(0));
+           
+           var options = {
+          title: 'Temperatura',
+          hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
+          vAxis: {minValue: 0},
+          colors: ['red']
+        };
+          chart.draw(data,options);
         });
     }, 500);
-      }
-  
-      // load chart lib
-      google.load('visualization', '1', {
-        packages: ['corechart']
-      });
-
-      // call drawChart once google charts is loaded
-      google.setOnLoadCallback(drawChart);
-
-      // onload callback
+        }
+        google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      </script>
+      <script>
       function drawChartLux() {
-
-        // JSONP request
-        setInterval(function(){
+          setInterval(function(){
         var jsonData = $.getJSON("NewServletlux", function(result){
         }).done(function(results){
-            
-          var data = new google.visualization.DataTable();
+            var data = new google.visualization.DataTable();
           
           data.addColumn('datetime', 'Time');
           data.addColumn('number', 'Lux');
-          console.log("Holi");
           $.each(results, function (index, pos) {
               console.log(new Date(pos.x));
             data.addRow([
@@ -159,43 +141,30 @@
               parseFloat(pos.y)
             ]);
           });
-
-          var chart = new google.visualization.LineChart($('#chart1').get(0));
-
-          chart.draw(data, {
-            title: 'Lux',
-            vAxis: {
-            viewWindowMode:'explicit',
-            viewWindow: {
-              max:300,
-              min:0
-            }
-        }
-          });
-
+           var chart = new google.visualization.AreaChart($('#chart1').get(0));
+           
+           var options = {
+          title: 'Luz',
+          hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
+          vAxis: {minValue: 0},
+          colors: ['Green']
+        };
+          chart.draw(data,options);
         });
     }, 500);
-      }
-  
-      // load chart lib
-      google.load('visualization', '1', {
-        packages: ['corechart']
-      });
-
-      // call drawChart once google charts is loaded
-      google.setOnLoadCallback(drawChart);
-      // onload callback
-      function drawChartthresh() {  
-        // JSONP request
+        }
+        google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+    </script>
+    <script>
+        function drawChartthresh() {
         setInterval(function(){
         var jsonData = $.getJSON("NewServlet2", function(result){
         }).done(function(results){
-            
-          var data = new google.visualization.DataTable();
+            var data = new google.visualization.DataTable();
           
           data.addColumn('datetime', 'Time');
-          data.addColumn('number', 'y');
-          console.log("Holi");
+          data.addColumn('number', 'Sonido');
           $.each(results, function (index, pos) {
               console.log(new Date(pos.x));
             data.addRow([
@@ -203,28 +172,21 @@
               parseFloat(pos.y)
             ]);
           });
-
-          var chart = new google.visualization.LineChart($('#chart2').get(0));
-
-          chart.draw(data, {
-            title: 'Sonido',
-            hAxis: {title: 'y',  titleTextStyle: {color: '#333'}},
-            vAxis: {
-            viewWindowMode:'explicit',
-            viewWindow: {
-              max:300,
-              min:0
-            }
-        }
-          });
-
+           var chart = new google.visualization.AreaChart($('#chart2').get(0));
+           
+           var options = {
+          title: 'Sonido',
+          hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
+          vAxis: {minValue: 0},
+          colors: ['Brown']
+        };
+          chart.draw(data,options);
         });
+        google.charts.load('current', {'packages':['corechart']});
     }, 500);
-      }
-      // load chart lib
-      google.load('visualization', '1', {
-        packages: ['corechart']
-      });
+        }
+        
+      google.charts.setOnLoadCallback(drawChart);
       </script>
          <div id="chart" class="container" style="width: 100%;">
           <script> setInterval(drawChartCelcius(), 3000); </script>
@@ -292,7 +254,9 @@
                 Gauges Examples
               </div>
                 <div class="container">
-                    <div id="g1" class="gauge"></div>
+                    <div id="g1" class="gauge">
+                        
+                    </div>
                 </div>
             <script src="raphael-2.1.4.min.js"></script>
             <script src="justgage.js"></script>
@@ -300,12 +264,20 @@
                 var g1 = new JustGage({
                 id: "g1",
                 title: "Angulo",
-                value: 50,
+                value: 0,
                 min: 0,
                 max: 300,
                 decimals: 0,
                 gaugeWidthScale: 1.1
             });
+            setInterval(function(){
+                var jsonData = $.getJSON("AngleServlet", function(result){
+                }).done(function(results){
+                    $.each(results, function (index, pos) {
+                       g1.refresh(pos.y);
+                    });
+                }); 
+            },500);
             </script>
               <div class="card-footer small text-muted">
                 Updated yesterday at 11:59 PM
@@ -324,8 +296,7 @@
                 <i class="fa fa-pie-chart"></i>
                 Gauge
               </div>
-              <div class="card-body">
-               <canvas id="myPieChart" width="100%" height="100"></canvas> 
+              <div class="card-body"> 
               </div>
               <div class="card-footer small text-muted">
                 Updated yesterday at 11:59 PM
