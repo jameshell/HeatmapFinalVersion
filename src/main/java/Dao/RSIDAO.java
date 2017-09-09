@@ -42,7 +42,6 @@ public class RSIDAO {
         float b5=rs.getFloat("rssi_b5");
         float b6=rs.getFloat("rssi_b6");
         RSI rsi=new RSI(d, b1, b2, b3, b4, b5, b6);
-          System.out.println(rsi);
         ans.add(rsi);
       }
         rs.close();

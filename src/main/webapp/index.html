@@ -52,8 +52,36 @@
 
         <!-- Aca va el contenido de la navbar de la parte de arriba  --> 
         
-      
-   
+        <ul class="navbar-nav ml-auto">
+            
+              <li class="nav-item">
+                  <div class="led">
+                   <i class="fa fa-bolt"></i>
+                   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+                   <script>
+                       $(document).ready(function() {
+                        $("#Encender").click(function() {
+                            $.post(
+                        "ServletLed", 
+                     {Encender : "1"}
+                     )
+                         });
+                         $("#Apagar").click(function() {
+                            $.post(
+                        "ServletLed", 
+                     {Apagar : "0"}
+                     )
+                         });
+                        });
+                   </script>
+           <button class="btn btn-success" id="Encender">Encender</button>
+           <button class="btn btn-danger" id="Apagar">Apagar</button>  
+           
+                  </div>
+          </li>
+        </ul>
+     
+      </div>
 
 
     </nav>
@@ -95,9 +123,12 @@
            
            var options = {
           title: 'Temperatura',
+            
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
-          vAxis: {minValue: 0},
-          colors: ['red']
+          vAxis: {minValue: 0, title:"°C"},
+          colors: ['red'],
+          legend : { position:"none"}
+          
         };
           chart.draw(data,options);
         });
@@ -125,10 +156,11 @@
            var chart = new google.visualization.AreaChart($('#chart1').get(0));
            
            var options = {
-          title: 'Luz',
+          title: 'Luminosidad',
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
-          vAxis: {minValue: 0},
-          colors: ['Green']
+          vAxis: {minValue: 0,title:'Lux'},
+          colors: ['Green'],
+          legend : { position:"none"}
         };
           chart.draw(data,options);
         });
@@ -156,10 +188,11 @@
            var chart = new google.visualization.AreaChart($('#chart2').get(0));
            
            var options = {
-          title: 'Sonido',
+          title: 'Nivel de sonido',
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
-          vAxis: {minValue: 0},
-          colors: ['Brown']
+          vAxis: {minValue: 0,title:'Umbral'},
+          colors: ['Brown'],
+          legend : { position:"none"}
         };
           chart.draw(data,options);
         });
@@ -226,7 +259,6 @@
         var jsonData = $.getJSON("RSIServlet", function(result){
         }).done(function(results){
             var data = new google.visualization.DataTable();
-          
           data.addColumn('datetime', 'Time');
           data.addColumn('number', 'papata1');
           data.addColumn('number', 'papata2');
@@ -246,12 +278,13 @@
               parseFloat(pos.rssi_b6)
             ]);
           });
-           var chart = new google.visualization.AreaChart($('#rsi').get(0));
+           var chart = new google.visualization.LineChart($('#rsi').get(0));
            
            var options = {
-          title: 'Sonido',
+          title: 'RSSI',
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
-          colors: ['Brown','blue','pink','purple','orange','gray']
+          colors: ['Brown','blue','pink','purple','orange','gray'],
+          legend : { position:"none"}
         };
           chart.draw(data,options);
         });
