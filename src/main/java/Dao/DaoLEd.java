@@ -39,7 +39,7 @@ public class DaoLEd {
             String query = " insert into Led (estado)"
         + " values (?)";
         PreparedStatement preparedStmt = connection.prepareStatement(query);
-        preparedStmt.setInt(1, 1);
+        preparedStmt.setInt(1, 0);
         preparedStmt.execute();
         connection.close();
         System.out.println("Database connected!");
