@@ -3,9 +3,7 @@
     <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/644480E6-EA01-0A42-8936-993DAD77DDD2/main.js" charset="UTF-8"></script>
-    <link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/2DDD77DAD399-6398-24A0-10AE-6E084446/abn/main.css"/>
-    <script src="d3.min.js"></script>
+    
     
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,15 +11,7 @@
 
     <meta name="description" content="">
     <meta name="author" content="">
-    <style>
-
-#localizador {
-  margin: 0;
-  background: #111;
-  min-width: 960px;
-}
-
-</style>
+    
     <title>Dashboard Test</title>
 
     <!-- Bootstrap core CSS -->
@@ -42,7 +32,7 @@
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-      <a class="navbar-brand" href="#">Dashboard: Intel Edison + Raspberry Pi 3</a>
+      <a class="navbar-brand" href="#">Dashboard: Intel Edison + Raspberry Pi</a>
 
    <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
@@ -98,11 +88,8 @@
           <li class="breadcrumb-item active">Gráficos en tiempo real</li>
         </ol>
         <!-- Area Chart Example -->
-        <div class="card mb-3">
-          <div class="card-header">
-            <i class="fa fa-thermometer-three-quarters"></i>
-            Temperatura en función del tiempo
-          </div>
+        <div class="row">
+        <div class="col-md-4">
           <div class="card-body">
          <!--   <canvas id="myAreaChart" width="100%" height="30"></canvas> -->
          <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -208,11 +195,24 @@
         </div>
         </div>
             
-             <div class="card mb-3">
-          <div class="card-header">
-            <i class="fa fa-lightbulb-o"></i>
-            Luz en función del tiempo
-          </div>
+  
+            
+            <div class="col-md-4">
+        
+           <div id="g1" class="gauge">
+                        
+                    </div>
+        </div>
+            
+        
+            
+            
+             <div class="col-md-4">
+                 <p>Aqui va el radar!</p>
+        </div>
+            
+             <div class="col-md-4">
+        
           <div class="card-body">
              <div id="chart1" class="container" style="width: 100%;">
           <script> setInterval(drawChartLux(), 3000); </script>
@@ -220,11 +220,8 @@
           </div>
         </div>
             
-               <div class="card mb-3">
-          <div class="card-header">
-            <i class="fa fa-volume-up"></i>
-            Sonido en función del tiempo
-          </div>
+            
+               <div class="col-md-4">
           <div class="card-body">
            
                <div id="chart2" class="container" style="width: 100%;">
@@ -235,11 +232,7 @@
         </div>
             
             
-            <div class="card mb-3">
-          <div class="card-header">
-            <i class="fa fa-signal"></i>
-            RSSI en función del tiempo
-          </div>
+            <div class="col-md-4">
                <script>
         function drawChartRSI() {
         setInterval(function(){
@@ -285,9 +278,6 @@
           <!-- ADJUNTAR AQUI LOS GRAFICOS MALDITA SEA :V !!!!!!------------------------------------------ -->
           <script>setInterval(drawChartRSI(), 3000);</script>
           </div>
-          <div class="card-footer small text-muted">
-            Updated yesterday at 11:59 PM
-          </div>
         </div>
             
             
@@ -308,9 +298,7 @@
                 Gauges Examples
               </div>
                 <div class="container">
-                    <div id="g1" class="gauge">
-                        
-                    </div>
+                   
                 </div>
             <script src="raphael-2.1.4.min.js"></script>
             <script src="justgage.js"></script>
@@ -368,63 +356,6 @@
             Data Table Example
           </div>
           <div class="card-body" id="localizador">
-              
-              <script>
-
-                 var width = Math.max(460, innerWidth),
-                 height = Math.max(1, innerHeight);
-
-                 var x1 = width / 2,
-                 y1 = height / 2,
-                 x0 = x1,
-                 y0 = y1,
-                 i = 0,
-                 r = 50,
-                 τ = 3 * Math.PI;
-
-                 var canvas = d3.select("#localizador").append("canvas")
-                 .attr("width", width)
-                 .attr("height", height)
-                 .on("ontouchstart" in document ? "touchmove" : "mousemove", move);
-
-                 var context = canvas.node().getContext("2d");
-                 context.globalCompositeOperation = "lighter";
-                 context.lineWidth = 2;
-
-                 d3.timer(function() {
-                 context.clearRect(0, 0, width, height);
-
-                 var z = d3.hsl(++i % 360, 1, .2).rgb(),
-                 c = "rgba(" + z.r + "," + z.g + "," + z.b + ",",
-                 x = x0 += (x1 - x0) * .1,
-                 y = y0 += (y1 - y0) * .1;
-
-                 d3.select({}).transition()
-                 .duration(1000)
-                 .ease(Math.sqrt)
-                 .tween("circle", function() {
-                       return function(t) {
-                         context.strokeStyle = c + (1 - t) + ")";
-                         context.beginPath();
-                         context.arc(x, y, r * t, 0, τ);
-                         context.stroke();
-                        };
-                        });
-                        });
-
-                      function move() {
-                      var mouse = d3.mouse(this);
-                      x1 = mouse[0];
-                      y1 = mouse[1];
-                      d3.event.preventDefault();
-                                      }
-
-               </script>
-              
-              
-              
-              
-              
         
           </div>
           <div class="card-footer small text-muted">
@@ -433,9 +364,11 @@
         </div>
 
       </div>
+    </div>
       <!-- /.container-fluid -->
 
-    </div>
+
+
     <!-- /.content-wrapper -->
 
     <footer class="sticky-footer">
