@@ -32,7 +32,7 @@ public class DaoLEd {
         }
    }
    public void Apagado(){
-              String url = "jdbc:mysql://localhost:3306/Edison";
+              String url = "jdbc:mysql://localhost:3306/Edison?useLegacyDatetimeCode=false&serverTimezone=UTC";
         String username = "root";
         String password = "root";
         try (Connection connection = (Connection) DriverManager.getConnection(url, username, password)) {
