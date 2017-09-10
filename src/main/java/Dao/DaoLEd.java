@@ -9,13 +9,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Carlos
  */
 public class DaoLEd {
-   public void Encendido(){
+   public void Encendido() throws ClassNotFoundException, InstantiationException, IllegalAccessException{
+                  Class.forName("com.mysql.jdbc.Driver").newInstance();
+
        String url = "jdbc:mysql://localhost:3306/Edison?useLegacyDatetimeCode=false&serverTimezone=UTC";
         String username = "root";
         String password = "root";
@@ -31,7 +35,9 @@ public class DaoLEd {
             throw new IllegalStateException("Cannot connect the database!", e);
         }
    }
-   public void Apagado(){
+   public void Apagado() throws InstantiationException, ClassNotFoundException, IllegalAccessException{
+                  Class.forName("com.mysql.jdbc.Driver").newInstance();
+
               String url = "jdbc:mysql://localhost:3306/Edison?useLegacyDatetimeCode=false&serverTimezone=UTC";
         String username = "root";
         String password = "root";
