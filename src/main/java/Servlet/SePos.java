@@ -5,10 +5,8 @@
  */
 package Servlet;
 
-import Dao.DaoLuz;
 import Dao.DaoPos;
 import Datos.Posicion;
-import Datos.pos;
 import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -22,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author CARLOS
  */
-public class ServletPos extends HttpServlet {
+public class SePos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,7 +47,7 @@ public class ServletPos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                Gson g=new Gson();
+        Gson g=new Gson();
         DaoPos d=new DaoPos();
         ArrayList<Posicion> al=new ArrayList<>();
         al=d.busqueda();

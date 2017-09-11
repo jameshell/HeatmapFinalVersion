@@ -25,8 +25,8 @@
         <servlet-class>Servlet.ServletLed</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletPos</servlet-name>
-        <servlet-class>Servlet.ServletPos</servlet-class>
+        <servlet-name>SePos</servlet-name>
+        <servlet-class>Servlet.SePos</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
@@ -53,8 +53,8 @@
         <url-pattern>/ServletLed</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletPos</servlet-name>
-        <url-pattern>/ServletPos</url-pattern>
+        <servlet-name>SePos</servlet-name>
+        <url-pattern>/SePos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
