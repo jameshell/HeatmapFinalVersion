@@ -1,80 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<head>
+  <title>Dashboard Test</title>
+  <meta charset="utf-8">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://www.google.com/jsapi"></script>
-    <!-- Script para el radar -->
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="css/style.css">
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
 
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-    <title>Dashboard Test</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom fonts for this template -->
-    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Plugin CSS -->
-    <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/sb-admin.css" rel="stylesheet">
-    <style>
-        .botones {
-    margin-right: 1.5cm;
-}
-        
-    </style>
-        
-
-  </head>
-
-  <body class="fixed-nav sticky-footer" id="page-top">
-
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-      <a class="navbar-brand" href="#">Dashboard: Intel Edison + Raspberry Pi</a>
-      
-     
-
-  
-    
-         <!-- Aqui termina la parte de la navegacion del sidebard. --> 
-
-         <!-- Este es el toggler para la navigation page -->
-      
-
-        <!-- Aca va el contenido de la navbar de la parte de arriba  --> 
-        
-  
-
-    </nav>
-
-    <div class="content-wrapper col-lg-12">
-
-      <div>
-
-        <!-- Breadcrumbs -->
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="#">Dashboard</a>
-          </li>
-          <li class="breadcrumb-item active">Gráficos </li>
-        </ol>
-        <!-- Area Chart Example -->
-        <div class="row">
-        <div class="col-md-4">
-          <div class="card-body">
-         <!--   <canvas id="myAreaChart" width="100%" height="30"></canvas> -->
-         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Internet de las cosas - Dashboard: Intel Edison + Raspberry Pi 3</a>
+    </div>
+ 
+  </div>
+</nav>
+<!-- Zona de Scripts de Line Charts -->
+<!-- Script de temperatura -->
+ <script>
       function drawChartCelcius() {
           setInterval(function(){
         var jsonData = $.getJSON("NewServlet", function(result){
@@ -94,8 +44,8 @@
            
            var options = {
           title: 'Temperatura',
-          height: 230,
-          width: 500,
+          height: 330,
+          width: 550,
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
           vAxis: {minValue: 0, title:"°C"},
           colors: ['red'],
@@ -109,7 +59,9 @@
         google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
       </script>
-      <script>
+
+      <!-- Script de Luz -->
+       <script>
       function drawChartLux() {
           setInterval(function(){
         var jsonData = $.getJSON("NewServletlux", function(result){
@@ -143,7 +95,8 @@
         google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
     </script>
-    <script>
+    <!-- Script de Tresh -->
+     <script>
         function drawChartthresh() {
         setInterval(function(){
         var jsonData = $.getJSON("NewServlet2", function(result){
@@ -178,19 +131,21 @@
         
       google.charts.setOnLoadCallback(drawChart);
       </script>
-         <div id="chart" class="container" style="width: 100%;">
+
+
+
+  
+<div class="container-fluid">
+<div class="row">
+
+<div class="col-md-4">
+ <div id="chart" class="container" style="width: 100%;">
           <script> setInterval(drawChartCelcius(), 3000); </script>
       </div>
-     
-     
-        </div>
-        </div>
-            
-  
-            
-            <div class="col-md-4">
-        
-           <div id="g1" class="gauge">
+</div>
+
+<div class="col-md-4">
+     <div id="g1" class="gauge">
                         
                     </div>
                     
@@ -213,65 +168,86 @@
                          });
                         });
                    </script>
-                    
-                    
                     <button class="btn btn-success" type="submit" id="Encender">Encender</button>
            <button class="btn btn-danger" type="submit" id="Apagar">Apagar</button>
                 </div>
-        </div>
-            
-        
-            
-            
-             <div class="col-md-4 body">
-                 <script>
-                            document.getElementById("p2").style.top = 50%;
-                            document.getElementById("p2").style.left = 50%;
-                            
-                 </script>
-                 
-                 
-
-  <div id="cartesian">
-  <div class="cross-section"></div>
-   <div class="blip"></div>
-  <div class="box"></div>
-  <!-- AIUDA ME MUERO!!!  -->
-  <div class="xy0">3m</div>
-  <div class="y300px">0m</div>
-  <div class="y200px">1m</div>
-  <div class="y100px">2m</div>
-  <div class="x100px">2m</div>
-  <div class="x200px">4m</div>
-  <div class="x300px">6m</div>  
 </div>
-                 
-                
-        </div>
+
+<div class="col-md-4">
+    
+    
+    
+                 <div class="radar-wrapper">
+                    <div id="cartesian">
+                    <div class="cross-section"></div>
+                    <div class="spinner"></div>
+                        <div class="blip" id="ledsito"></div>
+                        <div class="box"></div>
+                                <!-- AIUDA ME MUERO!!!  -->
+                                    <div class="xy0">3m</div>
+                                         <div class="y300px">0m</div>
+                                            <div class="y200px">1m</div>
+                                                  <div class="y100px">2m</div>
+                                                        <div class="x100px">2m</div>
+                                                            <div class="x200px">4m</div>
+                                                                 <div class="x300px">6m</div>  
+                    </div>
+                </div>
+       
+    <!-- Script para posicionar un objeto dentro del radar y el sonido del radar -->
+    <script>
+        function conversion(ejeX, ejeY){
+            var porcentaje="%";
+            ejeX=0.1+ejeX;
+            ejeY=100-ejeY;
             
-             <div class="col-md-4">
+            ejeXString=ejeX.toString()+porcentaje;
+            ejeYString=ejeY.toString()+porcentaje;
+            
+            document.getElementById('ledsito').style.top = ejeYString;
+            document.getElementById('ledsito').style.left = ejeXString;
+        }
         
-          <div class="card-body">
-             <div id="chart1" class="container" style="width: 100%;">
+        conversion(55,100);
+
+        
+        //Para poner la coordenada (0,0) X debe ser igual a 90% & Y debe ser igual a 1%
+        //PARA PODER MOVER LOS DATOS EN EL CADA EJE 
+        //
+        //PARA EL EJE X ->    X= (1+X)
+        //PARA EL EJE Y ->    Y= (90-Y)
+        //
+       //document.getElementById('ledsito').style.top = "47%";
+       // document.getElementById('ledsito').style.left = "47%";
+        
+        var snd1 = new Audio("bleep.wav");
+        
+        function beep1(){
+        snd1.play();
+              }
+              setInterval(beep1, 960);
+              
+        
+        
+    </script>
+    
+    
+</div>
+
+<div class="col-md-4">
+  <div id="chart1" class="container" style="width: 100%;">
           <script> setInterval(drawChartLux(), 3000); </script>
       </div>
-          </div>
-        </div>
-            
-            
-               <div class="col-md-4">
-          <div class="card-body">
-           
-               <div id="chart2" class="container" style="width: 100%;">
+</div>
+
+<div class="col-md-4">
+    <div id="chart2" class="container" style="width: 100%;">
           <script> setInterval(drawChartthresh(), 3000); </script>
-      </div>
-              
-          </div>
-        </div>
-            
-            
-            <div class="col-md-4">
-               <script>
+    </div>
+</div>
+
+<div class="col-md-4">
+ <script>
         function drawChartRSI() {
         setInterval(function(){
         var jsonData = $.getJSON("RSIServlet", function(result){
@@ -299,7 +275,7 @@
            var chart = new google.visualization.LineChart($('#rsi').get(0));
            
            var options = {
-          width:400,
+          width:450,
           height: 230,
           title: 'RSSI',
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
@@ -314,26 +290,15 @@
         
       google.charts.setOnLoadCallback(drawChart);
       </script> 
-          <div id="rsi" class="card-body">
-          <!-- ADJUNTAR AQUI LOS GRAFICOS MALDITA SEA :V !!!!!!------------------------------------------ -->
+          <div id="rsi">
+          <!-- ADJUNTAR AQUI LOS GRAFICOS MALDITA SEA :V !!!!!! -->
           <script>setInterval(drawChartRSI(), 3000);</script>
           </div>
-        </div>
-            
-            
-            
-            
-            </div>
-            
-           
+</div>
 
-        <div class="row">
+</div>
 
-          <div class="col-lg-8">
-
-            <!-- Example Bar Chart Card -->
-        
-            <script src="raphael-2.1.4.min.js"></script>
+  <script src="raphael-2.1.4.min.js"></script>
             <script src="justgage.js"></script>
             <script>
                 var g1 = new JustGage({
@@ -356,64 +321,20 @@
             </script>
             
 
-            
-            <!-- /Card Columns -->
 
-          </div>
-        </div>
-
-        <!-- Example Tables Card -->
-
-      </div>
-    </div>
-      <!-- /.container-fluid -->
-
-
-
-    <!-- /.content-wrapper -->
-
-    
-
-    <!-- Scroll to Top Button -->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/popper/popper.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="vendor/datatables/jquery.dataTables.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="js/sb-admin.min.js"></script>
-
-    <!-- Script to enable google's chart approach -->
+</div>
+  <!-- Script to enable google's chart approach -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <!--  <script src="https://www.google.com/jsapi"></script> -->
     <script src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <!-- EXAMPLE SCRIPT -->
-        
-
-      <!--Script para la animacion de la area chart -->
-         
-
-        <!-- Script para conseguir el tiempo de la maquina y poder usarlo en graficas en funcion del tiempo  -->
+      <!-- Script para conseguir el tiempo de la maquina y poder usarlo en graficas en funcion del tiempo  -->
         <script>
             var nextTime = (function() {
                 var currentTime = parseInt(new Date().getTime() / 1000);
                 return function() { return currentTime++; }
             })();
         </script>
-
-  </body>
-
+</body>
 </html>
