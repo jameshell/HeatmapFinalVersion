@@ -5,11 +5,14 @@
  */
 package Servlet;
 
-import Dao.DaoLEd;
+import Dao.DaoLuz;
+import Dao.DaoPos;
+import Datos.Posicion;
+import Datos.pos;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Carlos
+ * @author CARLOS
  */
-public class ServletLed extends HttpServlet {
+public class ServletPos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,30 +35,6 @@ public class ServletLed extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getParameter("Encender")!=null) {
-            DaoLEd daoLEd=new DaoLEd();
-            try {
-                daoLEd.Encendido();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ServletLed.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InstantiationException ex) {
-                Logger.getLogger(ServletLed.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(ServletLed.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        if (request.getParameter("Apagar")!=null) {
-            DaoLEd daoLEd=new DaoLEd();
-            try {
-                daoLEd.Apagado();
-            } catch (InstantiationException ex) {
-                Logger.getLogger(ServletLed.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ServletLed.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(ServletLed.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -70,7 +49,14 @@ public class ServletLed extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+                Gson g=new Gson();
+        DaoPos d=new DaoPos();
+        ArrayList<Posicion> al=new ArrayList<>();
+        al=d.busqueda();
+        String json=g.toJson(al);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
     /**
@@ -84,7 +70,6 @@ public class ServletLed extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**

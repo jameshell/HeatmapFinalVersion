@@ -47,7 +47,11 @@
           height: 330,
           width: 550,
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
-          vAxis: {minValue: 0, title:"°C"},
+          vAxis: {viewWindowMode:'explicit',
+            viewWindow: {
+              max:50,
+              min:10
+            }, title:"°C"},
           colors: ['red'],
           legend : { position:"none"}
           
@@ -81,10 +85,13 @@
            
            var options = {
           title: 'Luminosidad',
-          height:230,
-          width:450,
+          height:330,
+          width:550,
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
-          vAxis: {minValue: 10,maxValue:50,title:'Lux'},
+          vAxis: {viewWindow: {
+              max:70,
+              min:0
+            },title:'Lux'},
           colors: ['Green'],
           legend : { position:"none"}
         };
@@ -116,11 +123,14 @@
            
            var options = {
           title: 'Nivel de sonido',
-          width:450,
-          height:230,
+          width:550,
+          height:330,
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
-          vAxis: {minValue: 0,title:'Umbral'},
-          colors: ['Brown'],
+          vAxis: {viewWindow: {
+              max:700,
+              min:0
+            },title:'Umbral'},
+          colors: ['Blue'],
           legend : { position:"none"}
         };
           chart.draw(data,options);
@@ -208,7 +218,7 @@
             document.getElementById('ledsito').style.left = ejeXString;
         }
         
-        conversion(55,100);
+        conversion(50,50);
 
         
         //Para poner la coordenada (0,0) X debe ser igual a 90% & Y debe ser igual a 1%
@@ -275,12 +285,17 @@
            var chart = new google.visualization.LineChart($('#rsi').get(0));
            
            var options = {
-          width:450,
-          height: 230,
+               width:550,
+          height:330,
           title: 'RSSI',
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
           colors: ['Brown','blue','pink','purple','orange','gray'],
-          legend : { position:"none"}
+          legend : { position:"none"},
+          vAxis: {viewWindow: {
+              max:-100,
+              min:-40
+            }
+        }
         };
           chart.draw(data,options);
         });
