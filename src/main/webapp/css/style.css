@@ -38,16 +38,16 @@ a {
 }
 
 .blip {
-  width: 7%;
-  height: 7%;
+  width: 9%;
+  height: 9%;
   position: absolute;
   background: #13E213;
   border-radius: 50%;
   top: 83%;
   left: 15%;
   opacity: 0;
-  -webkit-animation: blip 3s linear infinite;
-          animation: blip 3s linear infinite;
+  -webkit-animation: blip 1s linear infinite;
+          animation: blip 1s linear infinite;
 }
 .cross-section {
   left: 50%;
