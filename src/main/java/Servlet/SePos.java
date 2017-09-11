@@ -33,6 +33,7 @@ public class SePos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,7 +48,7 @@ public class SePos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Gson g=new Gson();
+         Gson g=new Gson();
         DaoPos d=new DaoPos();
         ArrayList<Posicion> al=new ArrayList<>();
         al=d.busqueda();

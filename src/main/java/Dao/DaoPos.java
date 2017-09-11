@@ -30,12 +30,11 @@ public class DaoPos {
         Class.forName("com.mysql.jdbc.Driver").newInstance();
       String myUrl = "jdbc:mysql://localhost:3306/Edison?useLegacyDatetimeCode=false&serverTimezone=UTC";
       Connection conn = DriverManager.getConnection(myUrl, "root", "root");
-      String query = "SELECT posx,posy FROM DatosEdison order by id desc limit 1";
+      String query = "SELECT posx,posy FROM DatosPi order by id desc limit 1";
       Statement st = conn.createStatement();
       ResultSet rs = st.executeQuery(query);
       while (rs.next())
       {
-        Timestamp d=rs.getTimestamp("hora");
         int x=rs.getInt("posx");
         int y=rs.getInt("posy");
         Posicion p=new Posicion(x, y);
