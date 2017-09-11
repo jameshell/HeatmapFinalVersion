@@ -5,6 +5,7 @@
  */
 package Dao;
 
+import Datos.Posi;
 import Datos.Posicion;
 import Datos.pos;
 import java.sql.Connection;
@@ -23,8 +24,8 @@ public class DaoPos {
     public DaoPos() {
     }
     
-    public ArrayList<Posicion> busqueda() {
-    ArrayList<Posicion> ans=new ArrayList();
+    public ArrayList<Posi> busqueda() {
+    ArrayList<Posi> ans=new ArrayList();
         try
     { 
         Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -37,7 +38,7 @@ public class DaoPos {
       {
         int x=rs.getInt("posx");
         int y=rs.getInt("posy");
-        Posicion p=new Posicion(x, y);
+        Posi p=new Posi(x, y);
         ans.add(p);
       }
         rs.close();

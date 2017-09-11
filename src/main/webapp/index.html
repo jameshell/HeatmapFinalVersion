@@ -194,10 +194,10 @@
                         <div class="blip" id="ledsito"></div>
                         <div class="box"></div>
                                 <!-- AIUDA ME MUERO!!!  -->
-                                    <div class="xy0">3m</div>
+                                    <div class="xy0">5m</div>
                                          <div class="y300px">0m</div>
-                                            <div class="y200px">1m</div>
-                                                  <div class="y100px">2m</div>
+                                            <div class="y200px">1.2m</div>
+                                                  <div class="y100px">2.2m</div>
                                                         <div class="x100px">2m</div>
                                                             <div class="x200px">4m</div>
                                                                  <div class="x300px">6m</div>  
@@ -218,7 +218,14 @@
             document.getElementById('ledsito').style.left = ejeXString;
         }
         
-        conversion(50,50);
+        setInterval(function(){
+                var jsonData = $.getJSON("SePos", function(result){
+                }).done(function(results){
+                    $.each(results, function (index, pos) {
+                       conversion(pos.x,pos.y);
+                    });
+                }); 
+            },500);
 
         
         //Para poner la coordenada (0,0) X debe ser igual a 90% & Y debe ser igual a 1%

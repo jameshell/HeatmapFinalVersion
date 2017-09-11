@@ -6,6 +6,7 @@
 package Servlet;
 
 import Dao.DaoPos;
+import Datos.Posi;
 import Datos.Posicion;
 import com.google.gson.Gson;
 import java.io.IOException;
@@ -50,7 +51,7 @@ public class SePos extends HttpServlet {
             throws ServletException, IOException {
          Gson g=new Gson();
         DaoPos d=new DaoPos();
-        ArrayList<Posicion> al=new ArrayList<>();
+        ArrayList<Posi> al=new ArrayList<>();
         al=d.busqueda();
         String json=g.toJson(al);
         response.setContentType("application/json");
