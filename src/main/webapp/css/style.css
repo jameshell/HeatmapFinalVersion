@@ -17,20 +17,6 @@ p, a {
 a {
   color: #83AFDC;
 }
-
-.radar-wrapper {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  width: 29vw;
-  height: 29vw;
-  border: 1px solid #13E213;
-  overflow: hidden;
-  box-shadow: 0 0 50px #13E213;
-  /*Posicion del radar como taly sus dimensiones */
-}
-
-
 #cartesian {
   width: 300px;
   height: 300px;
@@ -50,21 +36,7 @@ a {
   color: black;
   z-index: -2;
 }
-.spinner {
-  position: absolute;
-  height: 100%;
-  width: 20%;
-  background: -webkit-linear-gradient(20deg, #13E213 0%, transparent 49%);
-  background: linear-gradient(-290deg, #13E213 0%, transparent 49%);
-  -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
-  left: 50%;
-  top: 50%;
-  -webkit-animation: scan 2s linear infinite;
-          animation: scan 2s linear infinite;
-  border-left: 1px solid #13E213;
-  /* Palito que gira del radar */
-}
+
 .blip {
   width: 7%;
   height: 7%;
