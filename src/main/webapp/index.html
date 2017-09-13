@@ -153,7 +153,13 @@
           <script> setInterval(drawChartCelcius(), 3000); </script>
       </div>
 </div>
-
+    <style>
+        .gauge {
+        width: 550px;
+        height: 250px;
+    }
+    </style>
+      
 <div class="col-md-4">
      <div id="g1" class="gauge">
                         
@@ -299,8 +305,8 @@
           colors: ['Brown','blue','pink','purple','orange','gray'],
           legend : { position:"none"},
           vAxis: {viewWindow: {
-              max:-100,
-              min:-40
+              max:0,
+              min:-150
             }
         }
         };
@@ -319,9 +325,8 @@
 </div>
 
 </div>
-
   <script src="raphael-2.1.4.min.js"></script>
-            <script src="justgage.js"></script>
+            <script src="justgage.js" ></script>
             <script>
                 var g1 = new JustGage({
                 id: "g1",
@@ -329,6 +334,7 @@
                 value: 0,
                 min: 0,
                 max: 300,
+                width: 500,
                 decimals: 0,
                 gaugeWidthScale: 1.1
             });
