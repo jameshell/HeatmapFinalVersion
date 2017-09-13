@@ -18,7 +18,8 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Sistema IoT de Monitoreo y Posicionamiento</a>
-    </div>
+      <div id="empanada"> 
+    </div> 
  
   </div>
 </nav>
@@ -55,7 +56,7 @@
         fontSize: 25 // 12, 18 whatever you want (don't specify px)
     }},
 titleTextStyle: {
-        fontSize: 30 // 12, 18 whatever you want (don't specify px)
+        fontSize: 23 // 12, 18 whatever you want (don't specify px)
     },
           colors: ['red'],
           legend : { position:"none"}
@@ -100,7 +101,7 @@ titleTextStyle: {
         fontSize: 25 // 12, 18 whatever you want (don't specify px)
     }},
 titleTextStyle: {
-        fontSize: 30 // 12, 18 whatever you want (don't specify px)
+        fontSize: 23 // 12, 18 whatever you want (don't specify px)
     },
           colors: ['Green'],
           legend : { position:"none"}
@@ -147,7 +148,7 @@ titleTextStyle: {
           colors: ['Blue'],
           legend : { position:"none"},
               titleTextStyle: {
-        fontSize: 30 // 12, 18 whatever you want (don't specify px)
+        fontSize: 23 // 12, 18 whatever you want (don't specify px)
     }
         };
           chart.draw(data,options);
@@ -182,14 +183,29 @@ titleTextStyle: {
     float: left;
     padding: 15px;
     text-align: center;
-    width: 100%;
+    width: 100%;    
 }
-.navbar-brand {float:none;}
+.navbar-brand {
+    float:none;
+    font-size: 300%;
+    font-weight: bold;
+    color: #fff;
+}
+
+#tituloled{
+    font-weight: bold;
+    text-align: center;
+
+}
+#container-fluid{
+    padding-top: 100px;
+    margin-top: 100px
+}
+
         
     </style>
      <div id="g1" class="gauge">
-                        
-                    </div>
+                        </div>
                     
                 
                 <div class="text-center botones">
@@ -210,6 +226,8 @@ titleTextStyle: {
                          });
                         });
                    </script>
+                   <h4 id="tituloled">CONTROL DE LED</h4>
+                   
                     <button class="btn btn-success" type="submit" id="Encender">Encender</button>
            <button class="btn btn-danger" type="submit" id="Apagar">Apagar</button>
                 </div>
@@ -337,7 +355,7 @@ titleTextStyle: {
             
         },
         titleTextStyle: {
-        fontSize: 30 // 12, 18 whatever you want (don't specify px)
+        fontSize: 23 // 12, 18 whatever you want (don't specify px)
     }
         };
           chart.draw(data,options);
@@ -360,13 +378,15 @@ titleTextStyle: {
             <script>
                 var g1 = new JustGage({
                 id: "g1",
-                title: "Angulo",
+                title: "Giro",
                 value: 0,
                 min: 0,
                 max: 300,
                 width: 500,
                 decimals: 0,
-                gaugeWidthScale: 1.1
+                gaugeWidthScale: 1.1,
+                titleFontColor: "black"
+                
             });
             setInterval(function(){
                 var jsonData = $.getJSON("AngleServlet", function(result){
