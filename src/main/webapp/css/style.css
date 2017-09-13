@@ -8,15 +8,27 @@
 
 /* Cartesian Plane */
 
+.navbar-header {
+    float: left;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+}
+.navbar-brand {float:none;}
+
 p, a {
   margin-top: 40px; 
   color: #616161;
   text-decoration: none;
 }
+.gauge {
+        width: 550px;
+        height: 250px;}
 
 a {
   color: #83AFDC;
 }
+
 #cartesian {
   width: 300px;
   height: 300px;
