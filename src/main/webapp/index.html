@@ -51,7 +51,12 @@
             viewWindow: {
               max:40,
               min:10
-            }, title:"°C"},
+            }, title:"°C",titleTextStyle: {
+        fontSize: 25 // 12, 18 whatever you want (don't specify px)
+    }},
+titleTextStyle: {
+        fontSize: 30 // 12, 18 whatever you want (don't specify px)
+    },
           colors: ['red'],
           legend : { position:"none"}
           
@@ -91,7 +96,12 @@
           vAxis: {viewWindow: {
               max:70,
               min:0
-            },title:'Lux'},
+            },title:'Lux',titleTextStyle: {
+        fontSize: 25 // 12, 18 whatever you want (don't specify px)
+    }},
+titleTextStyle: {
+        fontSize: 30 // 12, 18 whatever you want (don't specify px)
+    },
           colors: ['Green'],
           legend : { position:"none"}
         };
@@ -129,9 +139,16 @@
           vAxis: {viewWindow: {
               max:700,
               min:0
-            },title:'Umbral'},
+            },title:'Umbral',
+            titleTextStyle: {
+        fontSize: 25 // 12, 18 whatever you want (don't specify px)
+    }
+        },
           colors: ['Blue'],
-          legend : { position:"none"}
+          legend : { position:"none"},
+              titleTextStyle: {
+        fontSize: 30 // 12, 18 whatever you want (don't specify px)
+    }
         };
           chart.draw(data,options);
         });
@@ -308,7 +325,11 @@
               max:0,
               min:-150
             }
-        }
+            
+        },
+        titleTextStyle: {
+        fontSize: 30 // 12, 18 whatever you want (don't specify px)
+    }
         };
           chart.draw(data,options);
         });
