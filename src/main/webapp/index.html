@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,7 +46,7 @@
            var chart = new google.visualization.AreaChart($('#chart').get(0));
            
            var options = {
-          title: 'Temperatura',
+          
           height: 330,
           width: 550,
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
@@ -90,7 +92,7 @@ titleTextStyle: {
            var chart = new google.visualization.AreaChart($('#chart1').get(0));
            
            var options = {
-          title: 'Luminosidad',
+          
           height:330,
           width:550,
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
@@ -133,7 +135,7 @@ titleTextStyle: {
            var chart = new google.visualization.AreaChart($('#chart2').get(0));
            
            var options = {
-          title: 'Nivel de sonido',
+          
           width:550,
           height:330,
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
@@ -303,7 +305,7 @@ titleTextStyle: {
 
 <div class="col-md-4">
   <div id="chart1" class="container" style="width: 100%;">
-          <script> setInterval(drawChartLux(), 3000); </script>
+          <script> setInterval(drawChartLux(), 1500); </script>
       </div>
 </div>
 
@@ -344,7 +346,7 @@ titleTextStyle: {
            var options = {
                width:550,
           height:330,
-          title: 'RSSI',
+          
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
           colors: ['Brown','blue','pink','purple','orange','gray'],
           legend : { position:"none"},
@@ -378,7 +380,7 @@ titleTextStyle: {
             <script>
                 var g1 = new JustGage({
                 id: "g1",
-                title: "Giro",
+                
                 value: 0,
                 min: 0,
                 max: 300,
