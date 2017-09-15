@@ -13,6 +13,63 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    <link rel="stylesheet" href="css/style.css">
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <style>
+        .gauge {
+        width: 500px;
+        height: 200px;}
+        
+        .navbar-header {
+    float: left;
+    padding: 15px;
+    text-align: center;
+    width: 100%;    
+}
+#temperatura{
+    text-align: center;
+    width: 100%;    
+}
+#sonido{
+    text-align: center;
+    width: 100%;    
+}
+#rssi{
+    text-align: center;
+    width: 100%;    
+}
+#luminosidad {
+    text-align: center;
+    width: 100%;    
+}
+#giro {
+    text-align: center;
+    width: 100%;    
+}
+
+.navbar-header {
+    float: left;
+    padding: 15px;
+    text-align: center;
+    width: 100%;    
+}
+.navbar-brand {
+    float:none;
+    font-size: 300%;
+    font-weight: bold;
+    color: #fff;
+}
+
+#tituloled{
+    font-weight: bold;
+    text-align: center;
+
+}
+#container-fluid{
+    padding-top: 100px;
+    margin-top: 100px
+}
+
+        
+    </style>
 </head>
 <body>
 
@@ -20,16 +77,6 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Sistema IoT de Monitoreo y Posicionamiento</a>
-      
-      
-      <div id="giro"> <p> Giro </p>
-    </div> 
-      <div id="luminosidad"> <p> Luminosidad </p>
-    </div> 
-    <div id="sonido"> <p> Sonido </p>
-    </div> 
-      <div id="rssi"> <p> RSSI </p>
-    </div> 
  
   </div>
 </nav>
@@ -54,9 +101,9 @@
            var chart = new google.visualization.AreaChart($('#chart').get(0));
            
            var options = {
-          
           height: 330,
           width: 550,
+          chartArea: {'height': '80%'},
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
           vAxis: {viewWindowMode:'explicit',
             viewWindow: {
@@ -66,7 +113,7 @@
         fontSize: 25 // 12, 18 whatever you want (don't specify px)
     }},
 titleTextStyle: {
-        fontSize: 23 // 12, 18 whatever you want (don't specify px)
+        fontSize: 0 // 12, 18 whatever you want (don't specify px)
     },
           colors: ['red'],
           legend : { position:"none"}
@@ -186,36 +233,9 @@ titleTextStyle: {
   
       
 <div class="col-md-4">
-    <style>
-        .gauge {
-        width: 550px;
-        height: 250px;}
-        
-        .navbar-header {
-    float: left;
-    padding: 15px;
-    text-align: center;
-    width: 100%;    
-}
-.navbar-brand {
-    float:none;
-    font-size: 300%;
-    font-weight: bold;
-    color: #fff;
-}
-
-#tituloled{
-    font-weight: bold;
-    text-align: center;
-
-}
-#container-fluid{
-    padding-top: 100px;
-    margin-top: 100px
-}
-
-        
-    </style>
+    <div id="giro"> <p> Giro </p>
+    </div> 
+    
      <div id="g1" class="gauge">
                         </div>
                     
@@ -236,12 +256,29 @@ titleTextStyle: {
                      {Apagar : "0"}
                      )
                          });
+                          $("#lamparaOff").click(function() {
+                            $.post(
+                        "ServletLed", 
+                     {Apagar : "2"}
+                     )
+                         });
+                           $("#lamparaOn").click(function() {
+                            $.post(
+                        "ServletLed", 
+                     {Encender : "3"}
+                     )
+                         });
+                     
+        
                         });
                    </script>
                    <h4 id="tituloled">CONTROL DE LED</h4>
                    
                     <button class="btn btn-success" type="submit" id="Encender">Encender</button>
            <button class="btn btn-danger" type="submit" id="Apagar">Apagar</button>
+           <button class="btn btn-primary" type="submit" id="lamparaOff">Lampara OFF</button>
+           <button class="btn btn-info" type="submit" id="lamparaOn">Lampara ON</button>
+   
                 </div>
 </div>
 
@@ -299,12 +336,12 @@ titleTextStyle: {
        //document.getElementById('ledsito').style.top = "47%";
        // document.getElementById('ledsito').style.left = "47%";
         
-        var snd1 = new Audio("bleep.wav");
+        var snd1 = new Audio("sonar.WAV");
         
         function beep1(){
         snd1.play();
               }
-              setInterval(beep1, 960);
+              setInterval(beep1, 500);
               
         
         
@@ -314,18 +351,24 @@ titleTextStyle: {
 </div>
 
 <div class="col-md-4">
+    
+      <div id="luminosidad"> <p> Luminosidad </p>
+    </div>
   <div id="chart1" class="container" style="width: 100%;">
           <script> setInterval(drawChartLux(), 1500); </script>
       </div>
 </div>
 
 <div class="col-md-4">
+     <div id="sonido"> <p> Sonido </p>
+    </div> 
     <div id="chart2" class="container" style="width: 100%;">
           <script> setInterval(drawChartthresh(), 3000); </script>
     </div>
 </div>
 
-<div class="col-md-4">
+<div class="col-md-4"> <div id="rssi"> <p> RSSI </p>
+    </div> 
  <script>
         function drawChartRSI() {
         setInterval(function(){
