@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Legend Example (DOM Legends) | heatmap.js</title>
+    <meta charset="utf-8">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://www.google.com/jsapi"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <style>
+      body, html, h2 { margin:0; padding:0; height:100%;}
+      body { font-family:sans-serif; }
+      body * { font-weight:200;}
+      #heatmapContainerWrapper { width:100%; height:100%; position:absolute; background:rgba(0,0,0,.1); }
+      #heatmapContainer { width:100%; height:100%;}
+      #heatmapLegend { background:white; position:absolute; bottom:0; right:0; padding:10px; }
+      #min { float:left; }
+      #max { float:right; }
+      h1 { position:absolute; background:black; color:white; padding:10px; font-weight:200;}
+      #all-examples-info { position:absolute; background:white; font-size:16px; padding:20px; top:100px; width:350px; line-height:150%; border:1px solid rgba(0,0,0,.2);}
+      body {
+    background-image: url("Dibujo3.png");                  /* <------ */
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    }
+    </style>
+
+  </head>
+  <body>
+    <div id="heatmapContainerWrapper">
+      <div id="heatmapContainer">
+
+      </div>
+      <div id="heatmapLegend">
+        <h2>Intensidad de temperatura</h2>
+        <span id="min"></span>
+        <span id="max"></span>
+        <img id="gradient" src="" style="width:100%" />
+      </div>
+    </div>
+       <h1>Mapa de calor para el laboratorio</h1>
+        <div id="all-examples-info">
+          <strong style="font-weight:bold;line-height:200%;font-size:18px;">Región Modelada</strong> <br /> Salón B201 - Bloque B
+        </div>
+    <script src="build/heatmap.js"></script>
+    <script>
+      window.onload = function() {
+        // helper function
+        function $(id) {
+          return document.getElementById(id);
+        };
+
+        /*  legend code */
+        // we want to display the gradient, so we have to draw it
+        var legendCanvas = document.createElement('canvas');
+        legendCanvas.width = 100;
+        legendCanvas.height = 10;
+
+        var legendCtx = legendCanvas.getContext('2d');
+        var gradientCfg = {};
+
+        function updateLegend(data) {
+          // the onExtremaChange callback gives us min, max, and the gradientConfig
+          // so we can update the legend
+          $('min').innerHTML = data.min;
+          $('max').innerHTML = data.max;
+          // regenerate gradient image
+          if (data.gradient != gradientCfg) {
+            gradientCfg = data.gradient;
+            var gradient = legendCtx.createLinearGradient(0, 0, 100, 1);
+            for (var key in gradientCfg) {
+              gradient.addColorStop(key, gradientCfg[key]);
+            }
+
+            legendCtx.fillStyle = gradient;
+            legendCtx.fillRect(0, 0, 100, 10);
+            $('gradient').src = legendCanvas.toDataURL();
+          }
+        };
+        /* legend code end */
+
+
+        // create a heatmap instance - these are the initial configurations for the heatmap
+        var heatmap = h337.create({
+          container: document.getElementById('heatmapContainer'),
+          maxOpacity: .5,
+          radius: 10,
+          blur: .75,
+          // update the legend whenever there's an extrema change
+          onExtremaChange: function onExtremaChange(data) {
+            updateLegend(data);
+          }
+        });
+
+        // boundaries for data generation
+        var width = (+window.getComputedStyle(document.body).width.replace(/px/,''));
+        var height = (+window.getComputedStyle(document.body).height.replace(/px/,''));
+
+        // generate 1000 datapoints of data throughout the heatmap
+        var generate = function() {
+          // randomly generate extremas
+          var extremas = [(Math.random() * 1000) >> 0,(Math.random() * 1000) >> 0];
+         // var max = Math.max.apply(Math, extremas);
+         // var min = Math.min.apply(Math,extremas);
+
+         var max = 100;
+         var min = 0;
+
+          var t = []; //these array will contain the data that will be used onthe heatmap
+          /*
+
+          // Iterates and generates over 1000 points into T
+          for (var i = 0; i < 1000; i++) {
+            //x stands for the width location
+            var x = (Math.random()* width) >> 0;
+            //y stand for its height location
+            var y = (Math.random()* height) >> 0;
+            // C is the value, in this case temperature, that will have the point
+            var c = ((Math.random()* max-min) >> 0) + min;
+            // btw, we can set a radius on a point basis
+            var r = (Math.random()* 80) >> 0;
+            // add to dataset
+            t.push({ x: x, y:y, value: c, radius: r });
+          } */
+          //Mitad=(650,400) Punto1:(230,400) Punto2:(1030,400) Punto3:(650,50) Punto4:(650,600)
+          var x=1;
+          var y=1;
+                    for (var i = 0; i < 350; i++) {
+       
+          var x =230; 
+          var y = 400; 
+          var c = 80;
+          var r = 190;
+
+          t.push({ x: x, y:y, value: c, radius: r });
+        }
+
+
+
+          var init = +new Date;
+          // set the generated dataset
+          heatmap.setData({
+            min: min,
+            max: max,
+            data: t
+          });
+
+          
+          console.log('took ', (+new Date) - init, 'ms');
+        };
+
+
+
+
+
+
+
+
+
+        // initial generate - on each click the function will run again and generate new datasets
+        generate();
+
+        // whenever a user clicks on the ContainerWrapper the data will be regenerated -> new max & min
+        document.getElementById('heatmapContainerWrapper').onclick = function() { generate(); };
+
+      };
+    </script>
+
+
+
+
+      <!-- Script to enable google's chart approach -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <!--  <script src="https://www.google.com/jsapi"></script> -->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+  </body>
+</html>

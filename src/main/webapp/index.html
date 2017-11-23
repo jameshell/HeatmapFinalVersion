@@ -24,25 +24,51 @@
     text-align: center;
     width: 100%;    
 }
+.heatTitle{
+    left: 20px;
+}
+
+.titulo{
+    font-weight: bold;
+}
 #temperatura{
-    text-align: center;
-    width: 100%;    
+    width: 100%;
+     position: absolute;
+     visibility: visible; 
+     left: 140px; 
+     top: 1px; 
+     z-index: 999;
 }
 #sonido{
-    text-align: center;
-    width: 100%;    
+    width: 100%;
+     position: absolute;
+     visibility: visible; 
+     left: 140px; 
+     top: 1px; 
+     z-index: 999; 
 }
 #rssi{
-    text-align: center;
-    width: 100%;    
+    width: 100%;
+     position: absolute;
+     visibility: visible; 
+     left: 140px; 
+     top: 1px; 
+     z-index: 999;    
 }
 #luminosidad {
-    text-align: center;
-    width: 100%;    
+    width: 100%;
+     position: absolute;
+     visibility: visible; 
+     left: 140px; 
+     top: 1px; 
+     z-index: 999;    
 }
 #giro {
     text-align: center;
-    width: 100%;    
+    width: 100%;   
+     position: absolute;
+     visibility: visible;
+     z-index: 999;  
 }
 
 .navbar-header {
@@ -68,6 +94,13 @@
     margin-top: 100px
 }
 
+.heatmap{
+    max-height: 70%;
+    max-width: 70%;
+    border-radius: 50%;
+}
+
+
         
     </style>
 </head>
@@ -77,6 +110,8 @@
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Sistema IoT de Monitoreo y Posicionamiento</a>
+      
+    
  
   </div>
 </nav>
@@ -155,10 +190,10 @@ titleTextStyle: {
               max:70,
               min:0
             },title:'Lux',titleTextStyle: {
-        fontSize: 25 // 12, 18 whatever you want (don't specify px)
+        fontSize: 20 // 12, 18 whatever you want (don't specify px)
     }},
 titleTextStyle: {
-        fontSize: 23 // 12, 18 whatever you want (don't specify px)
+        fontSize: 20 // 12, 18 whatever you want (don't specify px)
     },
           colors: ['Green'],
           legend : { position:"none"}
@@ -191,7 +226,7 @@ titleTextStyle: {
            
            var options = {
           
-          width:550,
+          width:520,
           height:330,
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
           vAxis: {viewWindow: {
@@ -199,13 +234,13 @@ titleTextStyle: {
               min:0
             },title:'Umbral',
             titleTextStyle: {
-        fontSize: 25 // 12, 18 whatever you want (don't specify px)
+        fontSize: 20 // 12, 18 whatever you want (don't specify px)
     }
         },
           colors: ['Blue'],
           legend : { position:"none"},
               titleTextStyle: {
-        fontSize: 23 // 12, 18 whatever you want (don't specify px)
+        fontSize: 20 // 12, 18 whatever you want (don't specify px)
     }
         };
           chart.draw(data,options);
@@ -224,7 +259,7 @@ titleTextStyle: {
 <div class="row">
 
 <div class="col-md-4">
-    <div id="temperatura"> <p> Temperatura </p>
+    <div id="temperatura" class="titulo"> <p> Temperatura </p>
     </div> 
  <div id="chart" class="container" style="width: 100%;">
           <script> setInterval(drawChartCelcius(), 3000); </script>
@@ -233,7 +268,7 @@ titleTextStyle: {
   
       
 <div class="col-md-4">
-    <div id="giro"> <p> Giro </p>
+    <div id="giro" class="titulo"> <p> Giro </p>
     </div> 
     
      <div id="g1" class="gauge">
@@ -282,17 +317,61 @@ titleTextStyle: {
                 </div>
 </div>
 
-<div class="col-md-4">
+<div class="col-md-4 portfolio-item">
+    <a class="portfolio-link" data-toggle="modal" href="#portfolioModal1">
+              <div class="portfolio-hover">
+                <div class="portfolio-hover-content">
+                  <i class="fa fa-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid heatmap" src="heatmap.png" alt="">
+            </a>
+            <div class="portfolio-caption">
+              <h4 class="heatTitle">        Heatmap</h4>
+              
+            </div>
     
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="close-modal" data-dismiss="modal">
+            <div class="lr">
+              <div class="rl"></div>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-8 mx-auto">
+                <div class="modal-body">
+                  <!-- Project Details Go Here -->
+                  <h2 class="text-uppercase">Heatmap</h2>
+                  <p class="item-intro text-muted"> Mapeo por vectores</p>
+                  <img class="img-fluid d-block mx-auto" src="heatmap.png" alt="">
+                  <p> <a href="heatmap-legend.html">Mapeo</a> hecho del laboratorio de redes y telecomunicaciones.</p>
+                  <ul class="list-inline">
+                    <li>Salón: B201</li>
+                    <li>Edificio: Bloque B ECEI</li>
+                    
+                  </ul>
+                  <button class="btn btn-primary" data-dismiss="modal" type="button">
+                    <i class="fa fa-times"></i>
+                    Close Project</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     
-    
+    <!--
                  <div class="radar-wrapper">
                     <div id="cartesian">
                     <div class="cross-section"></div>
                     <div class="spinner"></div>
                         <div class="blip" id="ledsito"></div>
                         <div class="box"></div>
-                                <!-- AIUDA ME MUERO!!!  -->
+                                
                                     <div class="xy0">5m</div>
                                          <div class="y300px">0m</div>
                                             <div class="y200px">1.2m</div>
@@ -302,7 +381,7 @@ titleTextStyle: {
                                                                  <div class="x300px">6m</div>  
                     </div>
                 </div>
-       
+       -->
     <!-- Script para posicionar un objeto dentro del radar y el sonido del radar -->
     <script>
         function conversion(ejeX, ejeY){
@@ -336,15 +415,12 @@ titleTextStyle: {
        //document.getElementById('ledsito').style.top = "47%";
        // document.getElementById('ledsito').style.left = "47%";
         
-        var snd1 = new Audio("sonar.WAV");
+       // var snd1 = new Audio("sonar.WAV");
         
-        function beep1(){
-        snd1.play();
-              }
-              setInterval(beep1, 500);
-              
-        
-        
+        //function beep1(){
+        //snd1.play();
+        //      }
+        //     setInterval(beep1, 500);
     </script>
     
     
@@ -352,7 +428,7 @@ titleTextStyle: {
 
 <div class="col-md-4">
     
-      <div id="luminosidad"> <p> Luminosidad </p>
+      <div id="luminosidad" class="titulo"> <p> Luminosidad </p>
     </div>
   <div id="chart1" class="container" style="width: 100%;">
           <script> setInterval(drawChartLux(), 1500); </script>
@@ -360,38 +436,30 @@ titleTextStyle: {
 </div>
 
 <div class="col-md-4">
-     <div id="sonido"> <p> Sonido </p>
+     <div id="sonido" class="titulo"> <p> Sonido </p>
     </div> 
     <div id="chart2" class="container" style="width: 100%;">
           <script> setInterval(drawChartthresh(), 3000); </script>
     </div>
 </div>
 
-<div class="col-md-4"> <div id="rssi"> <p> RSSI </p>
+<div class="col-md-4"> <div id="rssi" class="titulo"> <p> Temperatura vs Humedad </p>
     </div> 
  <script>
         function drawChartRSI() {
         setInterval(function(){
-        var jsonData = $.getJSON("RSIServlet", function(result){
+        var jsonData = $.getJSON("heatmapServlet", function(result){
         }).done(function(results){
             var data = new google.visualization.DataTable();
           data.addColumn('datetime', 'Time');
-          data.addColumn('number', 'papata1');
-          data.addColumn('number', 'papata2');
-          data.addColumn('number', 'papata3');
-          data.addColumn('number', 'papata4');
-          data.addColumn('number', 'papata5');
-          data.addColumn('number', 'papata6');
-          $.each(results, function (index, pos) {
-              console.log(new Date(pos.x));
+          data.addColumn('number', 'temperatura');
+          data.addColumn('number', 'humedad');
+          $.each(results, function (index, heatmap) {
+              console.log(new Date(heatmap.x));
             data.addRow([
-              (new Date(pos.x)),
-              parseFloat(pos.rssi_b1),
-              parseFloat(pos.rssi_b2),
-              parseFloat(pos.rssi_b3),
-              parseFloat(pos.rssi_b4),
-              parseFloat(pos.rssi_b5),
-              parseFloat(pos.rssi_b6)
+              (new Date(heatmap.x)),
+              parseFloat(heatmap.temperatura),
+              parseFloat(heatmap.humedad)
             ]);
           });
            var chart = new google.visualization.LineChart($('#rsi').get(0));
@@ -401,11 +469,11 @@ titleTextStyle: {
           height:330,
           
           hAxis: {title: 'Tiempo',  titleTextStyle: {color: 'black'}},
-          colors: ['Brown','blue','pink','purple','orange','gray'],
+          colors: ['orange','blue'],
           legend : { position:"none"},
           vAxis: {viewWindow: {
-              max:0,
-              min:-150
+              max:70,
+              min:0
             }
             
         },
@@ -433,6 +501,7 @@ titleTextStyle: {
             <script>
                 var g1 = new JustGage({
                 id: "g1",
+                
                 
                 value: 0,
                 min: 0,

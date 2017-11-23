@@ -28,6 +28,14 @@
         <servlet-name>SePos</servlet-name>
         <servlet-class>Servlet.SePos</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>heatmapServlet</servlet-name>
+        <servlet-class>Servlet.heatmapServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>dontMindMe</servlet-name>
+        <servlet-class>Servlet.dontMindMe</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>SePos</servlet-name>
         <url-pattern>/SePos</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>heatmapServlet</servlet-name>
+        <url-pattern>/heatmapServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>dontMindMe</servlet-name>
+        <url-pattern>/dontMindMe</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
