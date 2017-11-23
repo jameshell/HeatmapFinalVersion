@@ -29,6 +29,8 @@ public class heatmapDAO {
       String myUrl = "jdbc:mysql://localhost:3306/Edison?useLegacyDatetimeCode=false&serverTimezone=UTC";
       Connection conn = DriverManager.getConnection(myUrl, "root", "root");
       String query = "SELECT temperatura,posicionX,posicionY,humedad,hora FROM Raspberry order by id desc limit 100";
+      String query2= 
+      "SELECT * FROM (SELECT * FROM Raspberry1 LEFT JOIN Raspberry2 ON Raspberry1.id1=Raspberry2.id2 WHERE id1 IS NOT NULL AND id2 IS NOT NULL)s LEFT JOIN Raspberry3 ON s.id1=Raspberry3.id3 WHERE s.id1 IS NOT NULL AND s.id2 IS NOT NULL AND Raspberry3.id3 IS NOT NULL ORDER BY id1 DESC LIMIT 100;";
       Statement st = conn.createStatement();
       ResultSet rs = st.executeQuery(query);
       while (rs.next())

@@ -51,7 +51,7 @@
     <script>
       window.onload = function() {
         // helper function
-        function $(id) {
+        function $s(id) {
           return document.getElementById(id);
         };
 
@@ -67,8 +67,8 @@
         function updateLegend(data) {
           // the onExtremaChange callback gives us min, max, and the gradientConfig
           // so we can update the legend
-          $('min').innerHTML = data.min;
-          $('max').innerHTML = data.max;
+          $s('min').innerHTML = data.min;
+          $s('max').innerHTML = data.max;
           // regenerate gradient image
           if (data.gradient != gradientCfg) {
             gradientCfg = data.gradient;
@@ -79,7 +79,7 @@
 
             legendCtx.fillStyle = gradient;
             legendCtx.fillRect(0, 0, 100, 10);
-            $('gradient').src = legendCanvas.toDataURL();
+            $s('gradient').src = legendCanvas.toDataURL();
           }
         };
         /* legend code end */
@@ -104,7 +104,7 @@
         // generate 1000 datapoints of data throughout the heatmap
         var generate = function() {
           // randomly generate extremas
-          var extremas = [(Math.random() * 1000) >> 0,(Math.random() * 1000) >> 0];
+         // var extremas = [(Math.random() * 1000) >> 0,(Math.random() * 1000) >> 0];
          // var max = Math.max.apply(Math, extremas);
          // var min = Math.min.apply(Math,extremas);
 
@@ -128,17 +128,18 @@
             t.push({ x: x, y:y, value: c, radius: r });
           } */
           //Mitad=(650,400) Punto1:(230,400) Punto2:(1030,400) Punto3:(650,50) Punto4:(650,600)
-          var x=1;
+           var x=1;
           var y=1;
                     for (var i = 0; i < 350; i++) {
        
-          var x =230; 
+          var x =1000; 
           var y = 400; 
-          var c = 80;
-          var r = 190;
+          var c = 0;
+          var r = 0;
 
-          t.push({ x: x, y:y, value: c, radius: r });
+          t.push({ x: x, y:y, value: c, radius: r },{ x: 230, y:400, value: c, radius: r },{ x: 650, y:600, value: c, radius: r },{ x: 650, y:50, value: c, radius: r });
         }
+
 
 
 
@@ -163,10 +164,28 @@
 
 
         // initial generate - on each click the function will run again and generate new datasets
-        generate();
+        //generate();
 
         // whenever a user clicks on the ContainerWrapper the data will be regenerated -> new max & min
-        document.getElementById('heatmapContainerWrapper').onclick = function() { generate(); };
+        //document.getElementById('heatmapContainerWrapper').onclick = function() { generate(); };
+        
+          setInterval(function (){
+                var max = 100;
+                var min = 0;
+                var t = [];
+                var r = 80;
+                var jsonData = $.getJSON("heatmapServlet", function(result){
+                }).done(function(results){
+                    $.each(results, function (index, pos) {
+                       t.push({ x: 230, y:400, value:pos.#nombredelatributo , radius: r },{ x: 650, y:600, value: pos.#Valor2, radius: r},{ x: 650, y:50, value: pos.#VALOR3, radius: r },{ x: 650, y:600, value:pos.VALOR4 , radius: r });
+                       heatmap.setData({
+                           min:0,
+                            max:100,
+                            data: t
+                        });
+                    });
+                }); 
+            },500);
 
       };
     </script>
@@ -174,11 +193,7 @@
 
 
 
-      <!-- Script to enable google's chart approach -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <!--  <script src="https://www.google.com/jsapi"></script> -->
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
   </body>
 </html>
